@@ -1,0 +1,17 @@
+.button {
+    background-color: #000000
+    cursor: pointer; 
+    color: white;
+    padding: 20px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 3px 3px;
+  }
+
+  .canvas{
+      width: 300;
+      height: 300;
+  }
+  
