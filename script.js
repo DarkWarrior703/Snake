@@ -98,6 +98,6 @@ function restart() {
     running = 1;
     vx = 0, vy = 0;
     score = 0;
-    tail = [];
+    tail = [[x + size, y + size]];
     inter = setInterval(game, 1000 / 15);
 }
