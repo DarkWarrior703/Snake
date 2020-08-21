@@ -1,118 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Snake</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <canvas class="canvas"></canvas>
-        <div></div>
-        <script>
-            let x = 150, y = 150;
-            let vx = 0, vy = 0;
-            let inter = -1;
-            let running = 1;
-            let fx = 100, fy = 100;
-            let size = 10;
-            let score = 0;
-            let tail = [];
-            window.onload = function()
-            {   
-                gen_fruit();
-                inter = setInterval(game, 1000 / 15);
-            }
-            function game()
-            {
-                if(running)
-                {
-                    const canvas = document.querySelector('canvas');
-                    const ctx = canvas.getContext('2d');
-                    let pre = [x, y];
-                    let pre2;
-                    for(let i = 0; i < tail.length; i++)
-                    {
-                        pre2 = tail[i];
-                        tail[i] = pre;
-                        pre = pre2;
-                    }
-                    x += vx * size;
-                    y += vy * size;
-                    if(x >= canvas.width - size)
-                    {
-                        x = size;
-                    }
-                    if(x <= 0)
-                    {
-                        x = canvas.width - size;
-                    }
-                    if(y >= canvas.height - size)
-                    {
-                        y = size;
-                    }
-                    if(y <= 0)
-                    {
-                        y = canvas.height - size;
-                    }
-                    if(x == fx && y == fy)
-                    {
-                        score += 10;
-                        gen_fruit();
-                        tail.push([tail[tail.length - 1] - size, tail[tail.length - 1] - size]);
-                        console.log(tail);
-                    }
-                    ctx.fillStyle = 'Black';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = 'Green';
-                    ctx.fillRect(x, y, size, size);
-                    ctx.fillStyle = 'Red';
-                    ctx.fillRect(fx, fy, size, size);
-                    for(let i = 0; i < tail.length; i++)
-                    {
-                        ctx.fillStyle = 'Green';
-                        ctx.fillRect(tail[i][0], tail[i][1], size, size);
-                    }
-                    for(let i = 2; i < tail.length; i++)
-                    {
-                        if(tail[i][0] == x && tail[i][1] == y) running = 0;
-                    }
-                    document.querySelector('div').innerHTML = "<h1> Your score is " + score.toString() + ".</h1>";
-                }
-                else 
-                {
-                    clearInterval(inter);
-                    document.querySelector('div').innerHTML = "<h1> Your score was " + score.toString() + ".</h1> <p> See you next time! </p><button onclick='restart()' class='button'>Try again?</button>";
-                }
-            }
-            document.addEventListener("keypress", key);
-            function key(e)
-            {
-                if(e.key == 'q') running = 0;
-                else if(e.key == 'w') vy = -1, vx = 0;
-                else if(e.key == 'a') vx = -1, vy = 0;
-                else if(e.key == 's') vy = 1, vx = 0;
-                else if(e.key == 'd') vx = 1, vy = 0;
-            }
-            function gen_fruit()
-            {
-                fx = Math.floor(Math.random() * 10) * 30 + size
-                fy = Math.floor(Math.random() * 10) * 30 + size;
-                if(fx >= 280) fx = 280;
-                if(fx <= 20) fx = 20;
-                if(fy >= 280) fy = 280;
-                if(fy <= 20) fy = 20;
-            }
-            function restart()
-            {
-                gen_fruit();
-                x = 150;
-                y = 150;
-                running = 1;
-                vx = 0, vy = 0;
-                score = 0;
-                tail = [];
-                inter = setInterval(game, 1000 / 15);
-            }
-        </script>
-    </body>
+
+<head>
+    <title>Snake</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <canvas width="300" height="300"></canvas>
+    <div></div>
+</body>
+
 </html>
